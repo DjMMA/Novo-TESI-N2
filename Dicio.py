@@ -2,40 +2,27 @@
 
 RACES = {
     "Humano":{
-        "Constituição": 1,
-        "Força":1,
-        "Inteligência":1,
-        "Carisma": 1,
-        "Agilidade": 1,
+        "Vida": 0,
+        "Ataque":0,
+        "Defesa":0
     }
 }
 CLASSES = {
     "Guerreiro":{
-        "Constituição": 2,
-        "Força": 2,
-        "Inteligência": -2,
-        "Carisma": 0,
-        "Agilidade": 1,
+        "Vida": 65,
+        "Ataque": 3,
+        "Defesa": 10
     },
+    
     "Mago":{
-        "Constituição": 1,
-        "Força": -2,
-        "Inteligência": 3,
-        "Carisma": 1,
-        "Agilidade": 2,
+        "Vida": 45,
+        "Ataque": 7,
+        "Defesa": 6
     },
-    "Arqueiro":{
-        "Constituição": 0,
-        "Força": -1,
-        "Inteligência": 1,
-        "Carisma": 3,
-        "Agilidade": 2,
-    },
-    "Ladino":{
-        "Constituição": 1,
-        "Força": -2,
-        "Inteligência": 0,
-        "Carisma": 1,
-        "Agilidade": 2,
+    
+    "Nenhum":{
+        "Vida": 55,
+        "Ataque": 5,
+        "Defesa": 8
     }
 }

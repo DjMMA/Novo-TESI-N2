@@ -9,19 +9,25 @@ TABLE_NAME = 'USERS'
 
 def cria_conexao_banco():
     conexao = sqlite3.Connection(DB_FILE)
+    conexao = sqlite3.connect(DB_FILE)
     cursor = conexao.cursor()
     sql = (
         f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             ' id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,'
             ' nome_usuario TEXT UNIQUE NOT NULL,'
-            ' senha_usuario TEXT NOT NULL,'
-            ' boraaa  INTEGER NOT NULL, '
-            ' FOREIGN KEY (boraaa) references '
-            f'"PERSONAS"("id_PERSONA")'
+            ' senha_usuario TEXT NOT NULL'
         ')'
     )
     cursor.execute(sql)
     return conexao, cursor
+
+def mostra_todos():
+    conexao, cursor = cria_conexao_banco()
+    sql = F'SELECT * FROM {TABLE_NAME}'
+    cursor.execute(sql)
+    print(cursor.fetchall())
+    cursor.close()
+    conexao.close()
 
 def insere_valores(*args):
     conexao, cursor = cria_conexao_banco()
@@ -34,30 +40,25 @@ def insere_valores(*args):
     try:
         cursor.execute(sql, (args))
         conexao.commit()
+        mostra_todos()
         cursor.close()
         conexao.close()
     except Exception as e:
-        # print("Este usuário já existe  -> ", e, "-> ", args[0])
+        print("Este usuário já existe  -> ", e, "-> ", args[0])
         cursor.close()
         conexao.close()
         
-def mostra_todos():
-    conexao, cursor = cria_conexao_banco()
-    sql = F'SELECT * FROM {TABLE_NAME}'
-    cursor.execute(sql)
-    print(cursor.fetchall())
-    cursor.close()
-    conexao.close()
+
     
 def seleciona_por_nome(nome):
     conexao, cursor = cria_conexao_banco()
     sql = f'SELECT senha_usuario FROM {TABLE_NAME} WHERE nome_usuario = ?'
     cursor.execute(sql, [nome])
-    senha = cursor.fetchone()[0]
     conexao.commit()
+    senha = (cursor.fetchone()[0])
     cursor.close()
     conexao.close()
-    return senha
+    return senha 
 
 def seleciona_por_id(id):
     conexao, cursor = cria_conexao_banco()
@@ -77,11 +78,15 @@ def limpa_todos():
     cursor.close()
     conexao.close()
 
-# limpa_todos()
+limpa_todos()
 insere_valores('Julio', '1608jc')
 mostra_todos()
 print('\nseparação aqui\n')
-seleciona_por_nome('Julio')
+print(seleciona_por_nome('Julio'))
 seleciona_por_id('1')
+
+con, cur = cria_conexao_banco()
+cur.execute('SELECT * FROM USERS')
+print(cur.fetchall())
     
     

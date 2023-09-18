@@ -42,7 +42,7 @@ class Criar_persona():
         lbl_classe = tk.Label (self.persona, text='Escolha sua classe!')
         lbl_classe.grid(row = 4, column= 1, columnspan=5)
 
-        Classes = ['Guerreiro', 'Mago', 'Arqueiro', 'Ladino']
+        Classes = ['Guerreiro', 'Mago', 'Nenhum']
         self.cbx_classe = ttk.Combobox(self.persona, values = Classes, state = 'readonly')
         self.cbx_classe.grid(row = 5, column= 1, columnspan=5)
 
@@ -55,54 +55,39 @@ class Criar_persona():
         self.atributos=tk.LabelFrame(self.frm, text='Atributos')
         
 
-        lbl_pontos = tk.Label (self.atributos, text='Distribua seus pontos!')
+        lbl_pontos = tk.Label (self.atributos, text='Estes são seus pontos!')
         lbl_pontos.grid(row = 0, column= 0, columnspan=5)
 
         self.var=tk.IntVar()
 
-        self.con = tk.Spinbox(self.atributos, textvariable=self.var, from_=0, to=20, width=3)
-        self.con.grid(row = 1, column= 0)
+        self.vida = tk.Spinbox(self.atributos, textvariable=self.var, from_=0, to=80, width=3)
+        self.vida.grid(row = 1, column= 0)
 
-        lbl_con = tk.Label(self.atributos, text='Constituição')
-        lbl_con.grid(row=1,column=1)
+        lbl_vida = tk.Label(self.atributos, text='Vida')
+        lbl_vida.grid(row=1,column=1)
 
         self.var1=tk.IntVar()
 
-        self.For = tk.Spinbox(self.atributos, textvariable=self.var1, from_=0, to=20, width=3)
-        self.For.grid(row = 2, column= 0)
+        self.ataq = tk.Spinbox(self.atributos, textvariable=self.var1, from_=0, to=80, width=3)
+        self.ataq.grid(row = 2, column= 0)
 
-        lbl_For = tk.Label(self.atributos, text='Força')
-        lbl_For.grid(row=2,column=1)
+        lbl_ataq = tk.Label(self.atributos, text='Ataque')
+        lbl_ataq.grid(row=2,column=1)
 
         self.var2=tk.IntVar()
 
-        self.int = tk.Spinbox(self.atributos, textvariable=self.var2, from_=0, to=20, width=3)
-        self.int.grid(row = 3, column= 0)
+        self.defe = tk.Spinbox(self.atributos, textvariable=self.var2, from_=0, to=80, width=3)
+        self.defe.grid(row = 3, column= 0)
 
-        lbl_int = tk.Label(self.atributos, text='Inteligência')
-        lbl_int.grid(row=3,column=1)
+        lbl_defe = tk.Label(self.atributos, text='Defesa')
+        lbl_defe.grid(row=3,column=1)
 
         self.var3=tk.IntVar()
-
-        self.car = tk.Spinbox(self.atributos, textvariable=self.var3, from_=0, to=20, width=3)
-        self.car.grid(row = 4, column= 0)
-
-        lbl_car = tk.Label(self.atributos, text='Carisma')
-        lbl_car.grid(row=4,column=1)
-
-        self.var4=tk.IntVar()
-
-        self.agi = tk.Spinbox(self.atributos, textvariable=self.var4, from_=0, to=20, width=3)
-        self.agi.grid(row = 5, column= 0)
-
-        lbl_agi = tk.Label(self.atributos, text='Agilidade')
-        lbl_agi.grid(row=5,column=1)
-
-        self.atributos.grid(row=0,column=0)
         
+        self.atributos.grid(row=0, column=0)
         #---------------------------------------------------------------------------------------------------------------
         bnt_criar = tk.Button (self.frm, text='Criar', command=self.valores)
-        bnt_criar.grid(row = 6, column= 0, columnspan=2, ipadx=15, pady=10)
+        bnt_criar.grid(row = 5, column= 0, columnspan=2, ipadx=15, pady=10)
         
         self.frm.grid(row=0, column=0)
 
@@ -127,8 +112,8 @@ class Criar_persona():
         race=Dicio.RACES[self.race]
         print(race)
         id=0
-        list_attr=[self.con, self.For, self.int, self.car, self.agi]
-        list_var=[self.var, self.var1, self.var2, self.var3, self.var4]
+        list_attr=[self.vida, self.ataq, self.defe]
+        list_var=[self.var, self.var1, self.var2, self.var3]
         for value in race.values():
             list_attr[id].config(from_=value)
             list_var[id].set(value)
@@ -144,8 +129,8 @@ class Criar_persona():
 
         id=0
         v=[]
-        list_attr=[self.con, self.For, self.int, self.car, self.agi]
-        list_var=[self.var, self.var1, self.var2, self.var3, self.var4]
+        list_attr=[self.vida, self.ataq, self.defe]
+        list_var=[self.var, self.var1, self.var2, self.var3]
         for i in list_attr:
             x=int(list_attr[id].get())
             v.append(x)
@@ -158,3 +143,5 @@ class Criar_persona():
             list_var[id].set(x)
             id+=1
 
+    def get_classe_selecionada(self):
+        return self.cbx_classe.get()

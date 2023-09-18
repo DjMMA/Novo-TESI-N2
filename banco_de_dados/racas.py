@@ -14,11 +14,9 @@ def cria_conexao_banco():
         f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             ' id_raca INTEGER PRIMARY KEY AUTOINCREMENT,'
             ' nome_raca TEXT UNIQUE NOT NULL,'
-            ' constituicao_raca INTEGER DEFAULT 0,'
-            ' forca_raca INTEGER DEFAULT 0,'
-            ' inteligencia_raca INTEGER DEFAULT 0,'
-            ' carisma_raca INTEGER DEFAULT 0,'
-            ' agilidade_raca INTEGER DEFAULT 0'
+            ' vida_raca INTEGER DEFAULT 0,'
+            ' ataque_raca INTEGER DEFAULT 0,'
+            ' defesa_raca INTEGER DEFAULT 0'
         ')'
     )
     cursor.execute(sql)
@@ -28,9 +26,9 @@ def insere_valores(*args):
     conexao, cursor = cria_conexao_banco()
     sql = (
         f'INSERT INTO {TABLE_NAME} ( '
-            ' nome_raca, constituicao_raca, forca_raca, inteligencia_raca, carisma_raca, agilidade_raca'
+            ' nome_raca, vida_raca, ataque_raca, defesa_raca'
         ')'
-        ' VALUES (?, ?, ?, ?, ?, ?)'
+        ' VALUES (?, ?, ?, ?)'
     )
     cursor.execute(sql, (args))
     conexao.commit()
@@ -72,10 +70,7 @@ def limpa_todos():
     conexao.close()
 
 # limpa_todos()
-insere_valores('Orc', 3, 4, -2, -1, 2)
-insere_valores('Humano', 1, -2, -1, 4, 2)
-insere_valores('Elfo', 1, 1, 3, -3, 2)
-insere_valores('Demônio', 2, -1, 3, -2, 3,)
+insere_valores('Humano', 0, 0, 0)
 mostra_todos()
     
     

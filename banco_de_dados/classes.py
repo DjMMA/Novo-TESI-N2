@@ -14,11 +14,9 @@ def cria_conexao_banco():
         f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             ' id_classe INTEGER PRIMARY KEY AUTOINCREMENT,'
             ' nome_classe TEXT UNIQUE NOT NULL,'
-            ' constituicao_classe INTEGER DEFAULT 0,'
-            ' forca_classe INTEGER DEFAULT 0,'
-            ' inteligencia_classe INTEGER DEFAULT 0,'
-            ' carisma_classe INTEGER DEFAULT 0,'
-            ' agilidade_classe INTEGER DEFAULT 0'
+            ' vida_classe INTEGER DEFAULT 0,'
+            ' ataque_classe INTEGER DEFAULT 0,'
+            ' defesa_classe INTEGER DEFAULT 0'
         ')'
     )
     cursor.execute(sql)
@@ -28,9 +26,9 @@ def insere_valores(*args):
     conexao, cursor = cria_conexao_banco()
     sql = (
         f'INSERT INTO {TABLE_NAME} ( '
-            ' nome_classe, constituicao_classe, forca_classe, inteligencia_classe, carisma_classe, agilidade_classe'
+            ' nome_classe, vida_classe, ataque_classe, defesa_classe'
         ')'
-        ' VALUES (?, ?, ?, ?, ?, ?)'
+        ' VALUES (?, ?, ?, ?)'
     )
     try:
         cursor.execute(sql, (args))
@@ -79,13 +77,14 @@ def limpa_todos():
     conexao.close()
 
 # limpa_todos()
-insere_valores('Guerreiro', '2', '2', '-2', '0', '1')
-insere_valores('Mago', '1', '-2', '3', '1', '2')
-insere_valores('Arqueiro', '0', '-1', '1', '3', '2')
-insere_valores('Ladino', '1', '-2', '0', '1', '4')
+insere_valores('Guerreiro', '65', '3', '10')
+insere_valores('Mago', '45', '7', '6')
+insere_valores('Nenhum', '55', '5', '8')
+
+
 mostra_todos()
 print('\nseparação aqui\n')
 seleciona_por_nome('Guerreiro')
-seleciona_por_id('2')
+seleciona_por_id('1')
     
     

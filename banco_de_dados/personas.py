@@ -14,11 +14,9 @@ def cria_conexao_banco():
         f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             ' id_PERSONA INTEGER PRIMARY KEY AUTOINCREMENT,'
             ' nome_persona TEXT UNIQUE NOT NULL,'
-            ' constituicao_persona INTEGER,'
-            ' forca_persona INTEGER,'
-            ' inteligencia_persona INTEGER,'
-            ' carisma_persona INTEGER,'
-            ' agilidade_persona INTEGER'
+            ' vida_persona INTEGER,'
+            ' ataque_persona INTEGER,'
+            ' defesa_persona INTEGER'
         ')'
     )
     cursor.execute(sql)
@@ -28,14 +26,13 @@ def insere_valores(*args):
     conexao, cursor = cria_conexao_banco()
     sql = (
         f'INSERT INTO {TABLE_NAME} ( '
+            ' id_persona INTEGER PRIMARY KEY AUTOINCREMENT, '
             ' nome_persona TEXT NOT NULL,'
-            ' constituicao_persona INTEGER,'
-            ' forca_persona INTEGER,'
-            ' inteligencia_persona INTEGER,'
-            ' carisma_persona INTEGER,'
-            ' agilidade_persona INTEGER'
+            ' vida_persona INTEGER,'
+            ' ataque_persona INTEGER,'
+            ' defesa_persona INTEGER'
         ')'
-        ' VALUES (?, ?, ?, ?, ?, ?)'
+        ' VALUES (?, ?, ?, ?)'
     )
     try:
         cursor.execute(sql, (args))
@@ -60,6 +57,7 @@ def seleciona_por_nome(nome):
     sql = f'SELECT * FROM {TABLE_NAME} WHERE nome_persona = ?'
     cursor.execute(sql, [nome])
     senha = cursor.fetchall()
+    print(senha, ' <- senha')
     conexao.commit()
     cursor.close()
     conexao.close()
@@ -84,7 +82,7 @@ def limpa_todos():
     conexao.close()
 
 # limpa_todos()
-insere_valores('Klaus', '5','2','2','3','4')
+insere_valores('Klaus', '0','0','0')
 mostra_todos()
 print('\nseparação aqui\n')
 seleciona_por_nome('Klaus')

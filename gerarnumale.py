@@ -1,21 +1,25 @@
 import tkinter as tk
 from tkinter import Button, Toplevel, Text, Scrollbar
 import random
+from Criar_persona import Criar_persona
 
 class Combate:
-    def __init__(self, root):
+    def __init__(self, root, criar_persona):
         self.janela = root
+        self.criar_persona = criar_persona
         # self.janela.title("Jogo de Combate")
         
         # Inicializa a vida do jogador e do monstro
         self.vida_jogador = 50
-        self.vida_monstro = 50
+        self.vida_monstro = 60
         
         # Cria uma lista para armazenar o histórico
         self.historico = []
 
         # Criação da interface gráfica
         self.criar_interface()
+        classe_selecionada = self.criar_persona.get_classe_selecionada()
+
         
     def criar_interface(self):
         # Labels para exibir a vida do jogador e do monstro

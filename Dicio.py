@@ -1,33 +1,12 @@
 
 
 RACES = {
-    "Orc":{
-        "Constituição": 2,
-        "Força": 2,
-        "Inteligência": -1,
-        "Carisma": -1,
-        "Agilidade": 0,
-    },
     "Humano":{
         "Constituição": 1,
         "Força":1,
         "Inteligência":1,
         "Carisma": 1,
         "Agilidade": 1,
-    },
-    "Elfo":{
-        "Constituição": -2,
-        "Força": -1,
-        "Inteligência": 1,
-        "Carisma": 0,
-        "Agilidade": 2,
-    },
-    "Demônio":{
-        "Constituição": 2,
-        "Força": 2,
-        "Inteligência": 2,
-        "Carisma": -5,
-        "Agilidade": -2,
     }
 }
 CLASSES = {
@@ -38,14 +17,14 @@ CLASSES = {
         "Carisma": 0,
         "Agilidade": 1,
     },
-    "Feiticeiro":{
+    "Mago":{
         "Constituição": 1,
         "Força": -2,
         "Inteligência": 3,
         "Carisma": 1,
         "Agilidade": 2,
     },
-    "Bardo":{
+    "Arqueiro":{
         "Constituição": 0,
         "Força": -1,
         "Inteligência": 1,

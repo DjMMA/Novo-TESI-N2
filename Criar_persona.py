@@ -4,6 +4,8 @@ import Dicio
 from bdcria import conecta, SELECT_ALL_CLASSES, SELECT_ALL_RACAS
 import sqlite3
 from gerarnumale import Combate
+from banco_de_dados.classes import insere_valores
+
 
 
 class Criar_persona():
@@ -32,7 +34,7 @@ class Criar_persona():
         lbl_raca = tk.Label (self.persona, text='Escolha sua raça!')
         lbl_raca.grid(row = 2, column= 1, columnspan=5)
 
-        Raças = ['Humano', 'Elfo', 'Demônio', 'Orc']
+        Raças = ['Humano']
         self.cbx_racas= ttk.Combobox(self.persona, values = Raças, state = 'readonly')
         self.cbx_racas.grid(row = 3, column= 1, columnspan=5)
         
@@ -41,7 +43,7 @@ class Criar_persona():
         lbl_classe = tk.Label (self.persona, text='Escolha sua classe!')
         lbl_classe.grid(row = 4, column= 1, columnspan=5)
 
-        Classes = ['Guerreiro', 'Feiticeiro', 'Bardo', 'Ladino']
+        Classes = ['Guerreiro', 'Mago', 'Arqueiro', 'Ladino']
         self.cbx_classe = ttk.Combobox(self.persona, values = Classes, state = 'readonly')
         self.cbx_classe.grid(row = 5, column= 1, columnspan=5)
 
@@ -100,11 +102,15 @@ class Criar_persona():
         self.atributos.grid(row=0,column=0)
         
         #---------------------------------------------------------------------------------------------------------------
-        bnt_criar = tk.Button (self.frm, text='Criar', command=self.combate)
+        bnt_criar = tk.Button (self.frm, text='Criar', command=self.valores)
         bnt_criar.grid(row = 6, column= 0, columnspan=2, ipadx=15, pady=10)
         
         self.frm.grid(row=0, column=0)
 
+    def valores(self):
+        self.limpar_tela()
+        insere_valores(self.frm)
+        
     def combate(self):
         self.limpar_tela()
         Combate(self.frm)

@@ -1,0 +1,5 @@
+Fazer entrada do usuario cadastro  >  nome e senha > botão continuar
+Escolher um save
+VOCE ENTROU EM UM NOVO MUNDO1
+VOCÊ É UM HUMANO
+ESCOLHA UMA CLASSE(SUA PROFISSÃO), GANHANDO ASSIM SEU BENEFICIO E MALEFICIO OU DISTRIBUA 9 PONTOS A SUA ESCOLHA

@@ -5,20 +5,19 @@ ROOT_DIR = Path(__file__).parent
 DB_NAME = 'banco.db'
 DB_FILE = ROOT_DIR / DB_NAME
 
-TABLE_NAME = 'CLASSES'
+TABLE_NAME = 'USERS'
 
 def cria_conexao_banco():
     conexao = sqlite3.Connection(DB_FILE)
     cursor = conexao.cursor()
     sql = (
         f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
-            ' id_classe INTEGER PRIMARY KEY AUTOINCREMENT,'
-            ' nome_classe TEXT UNIQUE NOT NULL,'
-            ' constituicao_classe INTEGER DEFAULT 0,'
-            ' forca_classe INTEGER DEFAULT 0,'
-            ' inteligencia_classe INTEGER DEFAULT 0,'
-            ' carisma_classe INTEGER DEFAULT 0,'
-            ' agilidade_classe INTEGER DEFAULT 0'
+            ' id_usuario INTEGER PRIMARY KEY AUTOINCREMENT,'
+            ' nome_usuario TEXT UNIQUE NOT NULL,'
+            ' senha_usuario TEXT NOT NULL,'
+            ' boraaa  INTEGER NOT NULL, '
+            ' FOREIGN KEY (boraaa) references '
+            f'"PERSONAS"("id_PERSONA")'
         ')'
     )
     cursor.execute(sql)
@@ -28,9 +27,9 @@ def insere_valores(*args):
     conexao, cursor = cria_conexao_banco()
     sql = (
         f'INSERT INTO {TABLE_NAME} ( '
-            ' nome_classe, constituicao_classe, forca_classe, inteligencia_classe, carisma_classe, agilidade_classe'
+            ' nome_usuario, senha_usuario'
         ')'
-        ' VALUES (?, ?, ?, ?, ?, ?)'
+        ' VALUES (?, ?)'
     )
     try:
         cursor.execute(sql, (args))
@@ -38,7 +37,7 @@ def insere_valores(*args):
         cursor.close()
         conexao.close()
     except Exception as e:
-        print("Classe já existente na tabela, por favor insira outra. -> ", e, "-> ", args[0])
+        # print("Este usuário já existe  -> ", e, "-> ", args[0])
         cursor.close()
         conexao.close()
         
@@ -52,17 +51,17 @@ def mostra_todos():
     
 def seleciona_por_nome(nome):
     conexao, cursor = cria_conexao_banco()
-    sql = f'SELECT * FROM {TABLE_NAME} WHERE nome_classe = ?'
+    sql = f'SELECT senha_usuario FROM {TABLE_NAME} WHERE nome_usuario = ?'
     cursor.execute(sql, [nome])
-    classe = cursor.fetchall()
+    senha = cursor.fetchone()[0]
     conexao.commit()
     cursor.close()
     conexao.close()
-    return classe
+    return senha
 
 def seleciona_por_id(id):
     conexao, cursor = cria_conexao_banco()
-    sql = f'SELECT * FROM {TABLE_NAME} WHERE id_classe = ?'
+    sql = f'SELECT * FROM {TABLE_NAME} WHERE id_usuario = ?'
     cursor.execute(sql, [id])
     classe = cursor.fetchall()
     conexao.commit()
@@ -79,13 +78,10 @@ def limpa_todos():
     conexao.close()
 
 # limpa_todos()
-insere_valores('Guerreiro', '2', '2', '-2', '0', '1')
-insere_valores('Mago', '1', '-2', '3', '1', '2')
-insere_valores('Arqueiro', '0', '-1', '1', '3', '2')
-insere_valores('Ladino', '1', '-2', '0', '1', '4')
+insere_valores('Julio', '1608jc')
 mostra_todos()
 print('\nseparação aqui\n')
-seleciona_por_nome('Guerreiro')
-seleciona_por_id('2')
+seleciona_por_nome('Julio')
+seleciona_por_id('1')
     
     

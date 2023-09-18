@@ -11,16 +11,6 @@ class Saves():
         btn_sv1.grid(row=0,column=0, padx=5, pady=6)
         self.lbl_frm_1.grid(row=0,column=0, padx=5, pady=6)
         
-        self.lbl_frm_2=LabelFrame(self.janela, text='Slot 2:')
-        btn_sv2=Button(self.lbl_frm_2, text='Criar personagem')
-        btn_sv2.grid(row=0,column=0, padx=5, pady=6)
-        self.lbl_frm_2.grid(row=0,column=1, padx=5, pady=6)
-                
-        self.lbl_frm_3=LabelFrame(self.janela, text='Slot 3:')
-        btn_sv3=Button(self.lbl_frm_3, text='Criar personagem')
-        btn_sv3.grid(row=0,column=0, padx=5, pady=6)
-        self.lbl_frm_3.grid(row=0,column=3, padx=5, pady=6)
-
     def criar_persona(self):
         self.limpar_tela()
         

@@ -2,7 +2,7 @@ from tkinter import*
 from ttkbootstrap import Style
 from tkinter import messagebox as messagebox
 from Saves import Saves
- 
+from banco_de_dados.users import insere_valores
 class Cadastro_user():
     Users=[]
     def __init__(self, root):
@@ -39,8 +39,8 @@ class Cadastro_user():
         elif senha!=conf_senha:
             messagebox.showwarning('Aviso', 'As senhas não são correspondentes!!', parent=self.janela)
         else:
-            usuario=[user, senha]
-            Cadastro_user.Users.append(usuario)
+            insere_valores(user,senha)
+            
             self.limpar_tela()
             Saves(self.janela)
 

@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
 import Dicio
-from bdcria import conecta, SELECT_ALL_CLASSES, SELECT_ALL_RACAS
 import sqlite3
 from gerarnumale import Combate
 from banco_de_dados.classes import insere_valores
@@ -109,7 +108,7 @@ class Criar_persona():
 
     def valores(self):
         self.limpar_tela()
-        insere_valores(self.frm)
+        insere_valores()
         
     def combate(self):
         self.limpar_tela()

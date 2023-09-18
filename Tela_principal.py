@@ -2,6 +2,7 @@ from tkinter import *
 from ttkbootstrap import Style
 from Cadastro_user import Cadastro_user as Cad_User
 from Saves import Saves as save
+from banco_de_dados.users import seleciona_por_nome
 
 class TelaPrincipal:
 
@@ -45,10 +46,15 @@ class TelaPrincipal:
     def logar(self):
         self.user=self.ent_user.get()
         self.senha=self.ent_senha.get()
+        senha_return = seleciona_por_nome(self.user)
+        print(senha_return)
         if self.senha=='' or self.user=='':
             self.btn_logar.config(self.btn_logar.grid(row=4, column=0,columnspan=2))
             self.btn_cadastrar.config(self.btn_cadastrar.grid(row=5, column=0,columnspan=2))
             lbl_aviso=Label(self.frm_principal, text='Por favor, preencha todos os campos!')
+            lbl_aviso.grid(row=3,column=0, columnspan=2)
+        elif senha_return != self.senha:
+            lbl_aviso=Label(self.frm_principal, text='Senha incorreta!')
             lbl_aviso.grid(row=3,column=0, columnspan=2)
         else:   
             self.limpar_tela()

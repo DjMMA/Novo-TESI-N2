@@ -3,6 +3,7 @@ from tkinter import ttk
 import Dicio
 from bdcria import conecta, SELECT_ALL_CLASSES, SELECT_ALL_RACAS
 import sqlite3
+from gerarnumale import Combate
 
 
 class Criar_persona():
@@ -15,7 +16,7 @@ class Criar_persona():
     def __init__(self, root):
 
         self.janela=root
-
+        print(type(self.janela))
         self.frm=tk.LabelFrame(self.janela, text='Personagem:')
 
         #caracteristicas-------------------------------------------------------------------------------------------------
@@ -99,13 +100,19 @@ class Criar_persona():
         self.atributos.grid(row=0,column=0)
         
         #---------------------------------------------------------------------------------------------------------------
-        bnt_criar = tk.Button (self.janela, text='Criar', command=lambda: self.inserir_bd())
-        bnt_criar.grid(row = 1, column= 0, columnspan=2, ipadx=15, pady=10)
-       
-
+        bnt_criar = tk.Button (self.frm, text='Criar', command=self.combate)
+        bnt_criar.grid(row = 6, column= 0, columnspan=2, ipadx=15, pady=10)
+        
         self.frm.grid(row=0, column=0)
 
-
+    def combate(self):
+        self.limpar_tela()
+        Combate(self.frm)
+        
+    def limpar_tela(self):
+        for widget in self.frm.winfo_children():
+            widget.destroy()
+        
     def get_attrs(self, event = None):
         self.Name=self.name.get()
         self.race=self.cbx_racas.get()

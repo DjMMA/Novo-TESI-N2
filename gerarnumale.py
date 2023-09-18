@@ -5,7 +5,7 @@ import random
 class Combate:
     def __init__(self, root):
         self.janela = root
-        self.janela.title("Jogo de Combate")
+        # self.janela.title("Jogo de Combate")
         
         # Inicializa a vida do jogador e do monstro
         self.vida_jogador = 50

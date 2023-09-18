@@ -1,26 +1,18 @@
 import tkinter as tk
 from tkinter import Button, Toplevel, Text, Scrollbar
 import random
-from Criar_persona import Criar_persona
 
 class Combate:
-    def __init__(self, root, criar_persona):
+    def __init__(self, root):
         self.janela = root
-        self.criar_persona = criar_persona
-        # self.janela.title("Jogo de Combate")
-        
-        # Inicializa a vida do jogador e do monstro
+        self.janela.title("Jogo de Combate")
         self.vida_jogador = 50
         self.vida_monstro = 60
-        
-        # Cria uma lista para armazenar o histórico
         self.historico = []
+        self.resultado_janela = None
 
-        # Criação da interface gráfica
         self.criar_interface()
-        classe_selecionada = self.criar_persona.get_classe_selecionada()
 
-        
     def criar_interface(self):
         # Labels para exibir a vida do jogador e do monstro
         self.vida_jogador_label = tk.Label(self.janela, text=f"Vida do Jogador: {self.vida_jogador}")
@@ -43,24 +35,20 @@ class Combate:
     def iniciar_combate(self):
         jogador = random.randint(1, 20)
         monstro = random.randint(1, 20)
-
         resultado = None
+        self.resultado_janela = Toplevel(self.janela)  # Atribui à variável de instância
+        self.resultado_janela.title("Resultado da Batalha")
         
         if jogador > monstro:
-            resultado = 'Você acertou seu ataque!'
+            resultado = 'O jogador atacou!'
             self.historico.append(resultado)
             self.gerar_dano_ataque()
         else:
-            if monstro <= 10:
-                resultado = 'Sua armadura lhe ajudou, o dano do monstro foi bloqueado!'
-                self.historico.append("Dano de ataque bloqueado pelo jogador.")
-            else:
-                resultado = 'O monstro lhe atacou!'
-                self.historico.append(resultado)
-                self.gerar_dano_sofrido()
-
+            resultado = 'O mostro atacou!'
+            self.historico.append(resultado)
+            self.gerar_dano_sofrido()
         
-        # Verifique se a vida do jogador ou do monstro chegou a zero
+        # Se a vida do jogador ou do monstro chegou a zero
         if self.vida_jogador <= 0:
             resultado = 'Você perdeu! O monstro ganhou!'
             self.historico.append(resultado)
@@ -72,48 +60,39 @@ class Combate:
             self.resultado_label.config(text=resultado)
             self.bnt_iniciar_combate.config(state=tk.DISABLED)  # Desabilita o botão de iniciar combate
 
-            
-        # Cria uma nova janela para exibir o resultado da batalha
-        resultado_janela = Toplevel(self.janela)
-        resultado_janela.title("Resultado da Batalha")
-
-        resultado_label = tk.Label(resultado_janela, text=resultado)
-        resultado_label.pack()
-
         
-
     def gerar_dano_ataque(self):
         dano_ataque = random.randint(1, 20)
 
-        if dano_ataque <= 5:
-            resultado_janela = Toplevel(self.janela)
-            resultado_janela.title("Dano de Ataque Fraco")
-            resultado_label2 = tk.Label(resultado_janela, text="Seu dano foi muito fraco, o monstro nem sentiu!")
+        if dano_ataque <= 6:
+            resultado_label2 = tk.Label(self.resultado_janela, text="Seu dano foi muito fraco, o monstro nem sentiu!")
             resultado_label2.pack()
-
             self.historico.append(f"Dano de ataque = {dano_ataque}, bloqueado pelo monstro.")
-        else:
-            resultado_janela = Toplevel(self.janela)
-            resultado_janela.title("Acerto no Ataque")
-            resultado_label2 = tk.Label(resultado_janela, text=f"Dano de Ataque: {dano_ataque}")
-            resultado_label2.pack()
             
+        else:
+            resultado_label2 = tk.Label(self.resultado_janela, text=f"Dano de Ataque: {dano_ataque}")
+            resultado_label2.pack()
             self.historico.append(f"Dano Ataque: {dano_ataque}")
 
-        self.vida_monstro -= dano_ataque
-        self.atualizar_vida()
+            self.vida_monstro -= dano_ataque
+            self.atualizar_vida()
+        
 
     def gerar_dano_sofrido(self):
         dano_sofrido = random.randint(1, 20)
-        resultado_janela = Toplevel(self.janela)
-        resultado_janela.title("Erro no Ataque")
-        resultado_label3 = tk.Label(resultado_janela, text=f"Dano Sofrido: {dano_sofrido}")
-        resultado_label3.pack()
+        
+        if dano_sofrido <= 10:
+            resultado_label4 = tk.Label(self.resultado_janela, text= "Sua armadura lhe ajudou, o dano do monstro foi bloqueado!")
+            resultado_label4.pack()
+            self.historico.append(f"Dano de sofrido = {dano_sofrido} bloqueado pelo jogador.")
+        else:
+            resultado_label4 = tk.Label(self.resultado_janela, text=f"Dano Sofrido: {dano_sofrido}")
+            resultado_label4.pack()
+            self.historico.append(f"Dano Sofrido: {dano_sofrido}")
 
-        self.historico.append(f"Dano Sofrido: {dano_sofrido}")
+            self.vida_jogador -= dano_sofrido
+            self.atualizar_vida()
 
-        self.vida_jogador -= dano_sofrido
-        self.atualizar_vida()
 
     def atualizar_vida(self):
         self.vida_jogador_label.config(text=f"Vida do Jogador: {self.vida_jogador}")

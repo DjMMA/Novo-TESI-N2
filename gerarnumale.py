@@ -1,20 +1,24 @@
 import tkinter as tk
 from tkinter import Button, Toplevel, Text, Scrollbar
 import random
-from Criar_persona import Criar_persona
+import banco_de_dados.classes as bd_classes
+
 
 class Combate:
     
-
-    def __init__(self, root):
+    def __init__(self, root, classe):
+        self.classe_selecionada = classe
         self.janela = root
-        self.vida_jogador = 'vida_classe'
+        self.vida_jogador, self.defesa_classe, self.ataque_classe = list(map(int, self.chama_atributos()))
         self.vida_monstro = 60
         self.historico = []
         self.resultado_janela = None
 
         self.criar_interface()
 
+    def chama_atributos(self):
+        return bd_classes.retorna_atributos(self.classe_selecionada)
+        
     def criar_interface(self):
         # Labels para exibir a vida do jogador e do monstro
         self.vida_jogador_label = tk.Label(self.janela, text=f"Vida do Jogador: {self.vida_jogador}")
@@ -74,25 +78,25 @@ class Combate:
         else:
             resultado_label2 = tk.Label(self.resultado_janela, text=f"Dano de Ataque: {dano_ataque}")
             resultado_label2.pack()
-            self.historico.append(f"Dano Ataque: {dano_ataque}")
+            self.historico.append(f"Dano Ataque: {dano_ataque + self.ataque_classe}")
 
-            self.vida_monstro =self.vida_monstro -  dano_ataque + 'ataque_classe'
+            self.vida_monstro = self.vida_monstro -  (dano_ataque + self.ataque_classe)
             self.atualizar_vida()
         
 
     def gerar_dano_sofrido(self):
         dano_sofrido = random.randint(1, 20)
         
-        if dano_sofrido <= 'defesa_classe':
+        if dano_sofrido <= self.defesa_classe:
             resultado_label4 = tk.Label(self.resultado_janela, text= "Sua armadura lhe ajudou, o dano do monstro foi bloqueado!")
             resultado_label4.pack()
             self.historico.append(f"Dano de sofrido = {dano_sofrido} bloqueado pelo jogador.")
         else:
-            resultado_label4 = tk.Label(self.resultado_janela, text=f"Dano Sofrido: {dano_sofrido}")
+            resultado_label4 = tk.Label(self.resultado_janela, text=f"Dano Sofrido: {dano_sofrido + 2}")
             resultado_label4.pack()
-            self.historico.append(f"Dano Sofrido: {dano_sofrido}")
+            self.historico.append(f"Dano Sofrido: {dano_sofrido + 2}")
 
-            self.vida_jogador -= dano_sofrido
+            self.vida_jogador = self.vida_jogador - (dano_sofrido + 2)
             self.atualizar_vida()
 
 

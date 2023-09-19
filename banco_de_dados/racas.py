@@ -79,7 +79,7 @@ def retorna_nome():
 
 
 # limpa_todos()
-# insere_valores('Humano', 0, 0, 0)
+#insere_valores('Humano', 0, 0, 0)
 mostra_todos()
 print()
 retorna_nome()

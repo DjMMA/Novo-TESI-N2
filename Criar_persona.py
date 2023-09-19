@@ -6,7 +6,7 @@ import banco_de_dados.classes as bd_classes
 from gerarnumale import Combate
 
 class Criar_persona():
-        
+    
     def Criou(self):
         self.lbl_frm_1.configure(text=self.name.get(), command=self.save_slct)
         self.btn_sv1.configure(text=self.name.get())
@@ -46,7 +46,6 @@ class Criar_persona():
         self.cbx_classe.bind('<<ComboboxSelected>>', self.class_attr)
 
         self.persona.grid(row=0,column=1)
-        #---------------------------------------------------------------------------------------------------------------
         
         #atributos------------------------------------------------------------------------------------------------------
         self.atributos=tk.LabelFrame(self.frm, text='Atributos')
@@ -56,7 +55,6 @@ class Criar_persona():
 
 
         self.var1=tk.IntVar()
-        # Classes = bd_classes.retorna_atributos()
         self.lbl_vida = tk.Label(self.atributos, text=0, width=3)
         self.lbl_vida.grid(row = 1, column= 0)
         lbl_nomevida = tk.Label(self.atributos, text='Vida')
@@ -77,15 +75,19 @@ class Criar_persona():
         lbl_nomedefe.grid(row=3,column=1)
         
         self.atributos.grid(row=0, column=0)
+        
         #---------------------------------------------------------------------------------------------------------------
+        
         bnt_criar = tk.Button (self.frm, text='Criar', command=self.combate)
         bnt_criar.grid(row = 5, column= 0, columnspan=2, ipadx=15, pady=10)
         
         self.frm.grid(row=0, column=0)
         
     def combate(self):
+        classe_selecionado = self.cbx_classe.get()
         self.limpar_tela()
-        Combate(self.frm)
+        Combate(self.frm, classe_selecionado)
+        
         
     def limpar_tela(self):
         for widget in self.frm.winfo_children():
@@ -99,8 +101,6 @@ class Criar_persona():
 
     def class_attr(self, event = None):
         self.classe=self.cbx_classe.get()
-        # classe = bd_classes.retorna_atributos(self.classe)
-        # print(classe)
         vida_classe, ataque_classe, defesa_classe = bd_classes.retorna_atributos(self.classe)
         self.lbl_vida.config(text= vida_classe)
         self.lbl_ataq.config(text= ataque_classe)

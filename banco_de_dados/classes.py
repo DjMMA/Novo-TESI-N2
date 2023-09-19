@@ -104,7 +104,7 @@ def retorna_atributos(nome_classe):
     print(valores)
     return valores
 
-# limpa_todos()
+# # limpa_todos()
 # insere_valores('Guerreiro', '65', '3', '10')
 # insere_valores('Mago', '45', '7', '6')
 # insere_valores('Nenhum', '55', '5', '8')

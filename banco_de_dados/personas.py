@@ -81,11 +81,5 @@ def limpa_todos():
     cursor.close()
     conexao.close()
 
-# limpa_todos()
-insere_valores('Klaus', '0','0','0')
-mostra_todos()
-print('\nseparação aqui\n')
-seleciona_por_nome('Klaus')
-seleciona_por_id('1')
-    
+
     

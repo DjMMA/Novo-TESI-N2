@@ -109,10 +109,10 @@ def retorna_atributos(nome_classe):
 # insere_valores('Mago', '45', '7', '6')
 # insere_valores('Nenhum', '55', '5', '8')
 
-mostra_todos()
-print()
-#retorna_nomes()
-nome_classe = 'Nenhum'
-retorna_atributos(nome_classe)
+# mostra_todos()
+# # print()
+# #retorna_nomes()
+# nome_classe = 'Nenhum'
+# retorna_atributos(nome_classe)
     
     

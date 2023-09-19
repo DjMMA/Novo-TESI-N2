@@ -63,7 +63,7 @@ class TelaPrincipal:
             
         else:   
             self.limpar_tela()
-            save(self.frm_principal)
+            save(self.frm_principal, self.user)
 
             btn_voltar_menu=Button(self.frm_principal, text='Voltar', command=self.login)
             btn_voltar_menu.grid(row=1,column=1, columnspan=2, rowspan=2, padx=5, pady=5)

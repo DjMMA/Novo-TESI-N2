@@ -12,9 +12,10 @@ class Criar_persona():
         self.btn_sv1.configure(text=self.name.get())
         self.janela.destroy()
 
-    def __init__(self, root):
+    def __init__(self, root, usuario):
 
         self.janela=root
+        self.user = usuario
         self.frm=tk.LabelFrame(self.janela, text='Personagem:')
 
         #caracteristicas-------------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ class Criar_persona():
     def combate(self):
         classe_selecionado = self.cbx_classe.get()
         self.limpar_tela()
-        Combate(self.frm, classe_selecionado)
+        Combate(self.frm, classe_selecionado, self.user)
         
         
     def limpar_tela(self):

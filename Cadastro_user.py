@@ -4,6 +4,7 @@ from tkinter import messagebox as messagebox
 from Saves import Saves
 from banco_de_dados.users import insere_valores
 
+
 class Cadastro_user():
     Users=[]
     def __init__(self, root):
@@ -43,7 +44,7 @@ class Cadastro_user():
             insere_valores(user,senha)
             
             self.limpar_tela()
-            Saves(self.janela)
+            Saves(self.janela, user)
 
         
     

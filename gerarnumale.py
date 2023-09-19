@@ -2,13 +2,16 @@ import tkinter as tk
 from tkinter import Button, Toplevel, Text, Scrollbar
 import random
 import banco_de_dados.classes as bd_classes
-
+import banco_de_dados.users as bd_users
+import banco_de_dados.save_historico as bd_saves
 
 class Combate:
     
-    def __init__(self, root, classe):
+    def __init__(self, root, classe, usuario):
         self.classe_selecionada = classe
         self.janela = root
+        self.user = usuario
+        print(self.user)
         self.vida_jogador, self.defesa_classe, self.ataque_classe = list(map(int, self.chama_atributos()))
         self.vida_monstro = 60
         self.historico = []
@@ -60,12 +63,18 @@ class Combate:
             self.historico.append(resultado)
             self.resultado_label.config(text=resultado)
             self.bnt_iniciar_combate.config(state=tk.DISABLED)  # Desabilita o botão de iniciar combate
+            self.salva_partida('0')
         elif self.vida_monstro <= 0:
             resultado = 'Você ganhou! O monstro foi derrotado!'
             self.historico.append(resultado)
             self.resultado_label.config(text=resultado)
             self.bnt_iniciar_combate.config(state=tk.DISABLED)  # Desabilita o botão de iniciar combate
+            self.salva_partida('1')
 
+    def salva_partida(self, status_vitoria):
+        id_jogador = bd_users.id_pelo_nick(self.user)
+        bd_saves.insere_valores(status_vitoria, self.vida_jogador, self.vida_monstro, id_jogador)
+        
         
     def gerar_dano_ataque(self):
         dano_ataque = random.randint(1, 20)

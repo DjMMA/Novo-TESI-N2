@@ -3,9 +3,9 @@ from tkinter import ttk as ttk
 from Criar_persona import Criar_persona
 
 class Saves():
-    def __init__(self, root):
+    def __init__(self, root, usuario):
         self.janela=root
-        
+        self.user = usuario
         self.lbl_frm_1=LabelFrame(self.janela, text='Slot 1:')
         btn_sv1=Button(self.lbl_frm_1, text='Criar personagem', command=self.criar_persona)
         btn_sv1.grid(row=0,column=0, padx=5, pady=6)
@@ -14,7 +14,7 @@ class Saves():
     def criar_persona(self):
         self.limpar_tela()
         
-        Criar_persona(self.janela)
+        Criar_persona(self.janela, self.user)
 
     def limpar_tela(self):
         for widget in self.janela.winfo_children():

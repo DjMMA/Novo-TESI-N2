@@ -21,6 +21,14 @@ def cria_conexao_banco():
     cursor.execute(sql)
     return conexao, cursor
 
+def id_pelo_nick(nome):
+    conexao, cursor = cria_conexao_banco()
+    sql = F'SELECT id_usuario FROM {TABLE_NAME} WHERE nome_usuario = ?'
+    cursor.execute(sql, [nome])
+    id = cursor.fetchone()[0]
+    conexao.close()
+    return id
+
 def mostra_todos():
     conexao, cursor = cria_conexao_banco()
     sql = F'SELECT * FROM {TABLE_NAME}'
@@ -47,7 +55,7 @@ def insere_valores(*args):
         print("Este usuário já existe  -> ", e, "-> ", args[0])
         cursor.close()
         conexao.close()
-        
+     
 
     
 def seleciona_por_nome(nome):
@@ -77,16 +85,3 @@ def limpa_todos():
     conexao.commit()
     cursor.close()
     conexao.close()
-
-limpa_todos()
-insere_valores('Julio', '1608jc')
-mostra_todos()
-print('\nseparação aqui\n')
-#print(seleciona_por_nome('Julio'))
-seleciona_por_id('1')
-
-con, cur = cria_conexao_banco()
-cur.execute('SELECT * FROM USERS')
-print(cur.fetchall())
-    
-    

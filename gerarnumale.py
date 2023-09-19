@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import Button, Toplevel, Text, Scrollbar
 import random
+from Criar_persona import Criar_persona
 
 class Combate:
+    
+
     def __init__(self, root):
         self.janela = root
-        self.janela.title("Jogo de Combate")
-        self.vida_jogador = 50
+        self.vida_jogador = 'vida_classe'
         self.vida_monstro = 60
         self.historico = []
         self.resultado_janela = None
@@ -74,14 +76,14 @@ class Combate:
             resultado_label2.pack()
             self.historico.append(f"Dano Ataque: {dano_ataque}")
 
-            self.vida_monstro -= dano_ataque
+            self.vida_monstro =self.vida_monstro -  dano_ataque + 'ataque_classe'
             self.atualizar_vida()
         
 
     def gerar_dano_sofrido(self):
         dano_sofrido = random.randint(1, 20)
         
-        if dano_sofrido <= 10:
+        if dano_sofrido <= 'defesa_classe':
             resultado_label4 = tk.Label(self.resultado_janela, text= "Sua armadura lhe ajudou, o dano do monstro foi bloqueado!")
             resultado_label4.pack()
             self.historico.append(f"Dano de sofrido = {dano_sofrido} bloqueado pelo jogador.")

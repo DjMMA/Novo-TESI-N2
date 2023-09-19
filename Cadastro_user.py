@@ -3,6 +3,7 @@ from ttkbootstrap import Style
 from tkinter import messagebox as messagebox
 from Saves import Saves
 from banco_de_dados.users import insere_valores
+
 class Cadastro_user():
     Users=[]
     def __init__(self, root):

@@ -82,7 +82,7 @@ limpa_todos()
 insere_valores('Julio', '1608jc')
 mostra_todos()
 print('\nseparação aqui\n')
-print(seleciona_por_nome('Julio'))
+#print(seleciona_por_nome('Julio'))
 seleciona_por_id('1')
 
 con, cur = cria_conexao_banco()

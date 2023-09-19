@@ -75,16 +75,44 @@ def limpa_todos():
     conexao.commit()
     cursor.close()
     conexao.close()
+    
+def retorna_classe():
+    conexao, cursor = cria_conexao_banco()
+    cursor.execute("SELECT nome_classe, vida_classe, ataque_classe, defesa_classe, FROM CLASSES")
+    valores = cursor.fetchall()
+    conexao.close()
+    print(valores)
+    return valores
+
+def retorna_nomes():
+    conexao, cursor = cria_conexao_banco()
+    cursor.execute("SELECT nome_classe FROM CLASSES")
+    valores = cursor.fetchall()
+    conexao.close()
+    print(valores)
+    return valores
+
+def retorna_atributos(nome_classe):
+    conexao, cursor = cria_conexao_banco()
+    stringattb = (
+        F'SELECT vida_classe, ataque_classe, defesa_classe FROM CLASSES'
+        ' WHERE nome_classe = ?'
+    )
+    cursor.execute(stringattb, [nome_classe])
+    valores = cursor.fetchone()
+    conexao.close()
+    print(valores)
+    return valores
 
 # limpa_todos()
-insere_valores('Guerreiro', '65', '3', '10')
-insere_valores('Mago', '45', '7', '6')
-insere_valores('Nenhum', '55', '5', '8')
-
+# insere_valores('Guerreiro', '65', '3', '10')
+# insere_valores('Mago', '45', '7', '6')
+# insere_valores('Nenhum', '55', '5', '8')
 
 mostra_todos()
-print('\nseparação aqui\n')
-seleciona_por_nome('Guerreiro')
-seleciona_por_id('1')
+print()
+#retorna_nomes()
+nome_classe = 'Nenhum'
+retorna_atributos(nome_classe)
     
     

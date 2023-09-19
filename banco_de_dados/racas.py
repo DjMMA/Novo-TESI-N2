@@ -69,8 +69,19 @@ def limpa_todos():
     cursor.close()
     conexao.close()
 
+def retorna_nome():
+    conexao, cursor = cria_conexao_banco()
+    cursor.execute("SELECT nome_raca FROM RACAS")
+    valores = cursor.fetchone()[0]
+    conexao.close()
+    print(valores)
+    return valores
+
+
 # limpa_todos()
-insere_valores('Humano', 0, 0, 0)
+# insere_valores('Humano', 0, 0, 0)
 mostra_todos()
+print()
+retorna_nome()
     
     
